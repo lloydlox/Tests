@@ -2,7 +2,7 @@ name: Build, Test and Package develop branch
 
 on:
   push:
-    branches: ["develop"]
+    branches: ["main"]
 
 jobs:
   #The build job to build and test all the project folders
