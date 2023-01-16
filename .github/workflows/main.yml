@@ -1,0 +1,51 @@
+name: Deploy-to-DigitalOcean
+
+on:
+  push:
+    branches: [ “develop” ]
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    
+   #represent a sequence of tasks that will be executed as part of the job
+    steps:
+    #uses checks out your repository under $GITHUB_WORKSPACE, so your job can access your repo
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          
+      - name: Build
+        run: |
+          yarn install
+          yarn build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: build
+      - uses: digitalocean/action-scp@v1
+        with:
+          token: ${{ secrets.DIGITALOCEAN_API_KEY }}
+          src: build
+          dest: /var/www/html
+          host: ${{ secrets.DROPLET_IP }}
+          user: root
+      - name: Restart Nginx
+        uses: digitalocean/action-cloud-init@v1
+        with:
+          token: ${{ secrets.DIGITALOCEAN_API_KEY}}
+          cloud_config: |
+            #cloud-config
+            runcmd:
+              - systemctl restart nginx
+          host: ${{ secrets.DROPLET_IP }}
+          user: root
