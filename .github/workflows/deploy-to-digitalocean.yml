@@ -28,6 +28,8 @@ jobs:
         run: |
           yarn install
           yarn build
+          yarn test:ci
+          
       - uses: actions/upload-artifact@v3
         with:
           name: build
