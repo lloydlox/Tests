@@ -21,7 +21,8 @@ jobs:
           ssh-keyscan -H ${{ secrets.DROPLET_IP}} >> ~/.ssh/known_hosts
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        #run: yarn install --frozen-lockfile
+        run: yarn install
       
       - name: Build application
         run: yarn build
