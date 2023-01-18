@@ -23,10 +23,10 @@ jobs:
       name: Install dependencies
       run: yarn install --frozen-lockfile
       
-    - name: Build application
+      name: Build application
       run: yarn run build
-
-    - name: Deploy to DigitalOcean
+      
+      name: Deploy to DigitalOcean
       run: |
         scp -rp build/* root@${{ secrets.DROPLET_IP }}:/var/www/my-app
         ssh root@${{ secrets.DROPLET_IP }} "systemctl restart my-app"
