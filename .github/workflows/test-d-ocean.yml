@@ -22,4 +22,4 @@ jobs:
 
       - name: Deploy code
         run: |
-          rsync -avz -e "ssh -o StrictHostKeyChecking=no" . root@${{ secrets.DROPLET_IP}}:/var/www/html
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no" . root@${{ secrets.DROPLET_IP}}:/var/www/html/urevise
