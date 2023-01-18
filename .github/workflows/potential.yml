@@ -26,10 +26,10 @@ jobs:
       - name: Build application
         run: yarn run build
 
-      #- name: Export Next.js application
-      #  run: yarn run export
+      - name: Export Next.js application
+        run: make package
 
       - name: Deploy to DigitalOcean
         run: |
-          scp -rp build/* root@${{ secrets.DROPLET_IP }}:/var/www/html/urevise
+          scp -rp package/* root@${{ secrets.DROPLET_IP }}:/var/www/html/urevise
           ssh root@${{ secrets.DROPLET_IP }} "systemctl restart ngnix"
