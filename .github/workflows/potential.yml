@@ -26,7 +26,7 @@ jobs:
       - name: Build application
         run: yarn build
 
-      #n- name: Export Next.js application
+      #n- nagme: Export Next.js application
         #nrun
 
       - name: Deploy to DigitalOcean
