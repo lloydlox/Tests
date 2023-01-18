@@ -24,10 +24,10 @@ jobs:
         run: yarn install --frozen-lockfile
       
       - name: Build application
-        run: next build
+        run: yarn build
 
       #n- name: Export Next.js application
-        #nrun: 
+        #nrun
 
       - name: Deploy to DigitalOcean
         run: |
