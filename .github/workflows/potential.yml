@@ -32,4 +32,4 @@ jobs:
       - name: Deploy to DigitalOcean
         run: |
           scp -rp .next/* root@${{ secrets.DROPLET_IP }}:/var/www/html/urevise
-          ssh root@${{ secrets.DROPLET_IP }} "cd /var/www/urevise && yarn start"
+          ssh root@${{ secrets.DROPLET_IP }} "cd /var/www/html/urevise && yarn start"
