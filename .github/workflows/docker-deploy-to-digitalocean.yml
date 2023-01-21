@@ -17,7 +17,7 @@ jobs:
       - name: Checkout the repo 
         uses: actions/checkout@v2
       - name: Build image 
-        run: docker build -t urevise-frontend .
+        run: docker build -t urevise.
       - name: Install doctl 
         uses: digitalocean/action-doctl@v2
         with:
@@ -26,6 +26,6 @@ jobs:
         run: doctl registry login --expiry-seconds 600
       - name: Tag image 
         run:
-          docker tag urevise-frontend registry.digitalocean.com/urevise-frontend:${{github.event.inputs.version }}
+          docker tag urevise registry.digitalocean.com/urevise-frontend:${{github.event.inputs.version }}
       - name: Push image to DO Container Registry 
         run: docker push registry.digitalocean.com/urevise-frontend:${{ github.event.inputs.version }}
