@@ -53,8 +53,8 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSHKEY }}
-          passphrase: ${{ secrets.PASSPHRASE }}
+          key: ${{ secrets.DIGITALOCEAN_SSH_KEY}}
+          # passphrase: ${{ secrets.PASSPHRASE }}
           envs: IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_API_TOKENP }},GITHUB_SHA
           script: |
             # Login to registry
