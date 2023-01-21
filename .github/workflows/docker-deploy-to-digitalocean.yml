@@ -21,12 +21,12 @@ jobs:
       - name: Install doctl 
         uses: digitalocean/action-doctl@v2
         with:
-          token: ${{ secrets.DIGITALOCEAN_API_TOKEN }}
+          token: ${{ secrets.DIGITALOCEAN_API_TOKENP }}
       - name: Log in to DO Container Registry 
         run: doctl registry login --expiry-seconds 600
       - name: Tag image 
         run:
           docker tag sample/my-page \
-          registry.digitalocean.com/my-sample-registry/urevise-frontend:${{github.event.inputs.version }}
+          registry.digitalocean.com/urevise-frontend:${{github.event.inputs.version }}
       - name: Push image to DO Container Registry 
-        run: docker push registry.digitalocean.com/my-sample-registry/urevise-frontend:${{ github.event.inputs.version }}
+        run: docker push registry.digitalocean.com/urevise-frontend:${{ github.event.inputs.version }}
