@@ -46,14 +46,13 @@ jobs:
           path: ${{ secrets.DIGITALOCEAN_SSH_KEY }}
 
       - name: Deploy to Droplet
-        uses: actions/checkout@v2
+        uses: actions/ssh-action@v2.1
         with:
           host: ${{ secrets.HOST }}
           username: root
           private-key: ${{ steps.copy-ssh-key.outputs.path }}
 
           script: |
-            
             docker login -u ${{ secrets.DIGITALOCEAN_API_TOKENP }} -p ${{ secrets.DIGITALOCEAN_API_TOKENP }} registry.digitalocean.com
             docker pull registry.digitalocean.com/urevise-frontend/urevise:latest
             docker stop urevise
