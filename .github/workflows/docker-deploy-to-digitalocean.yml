@@ -43,26 +43,29 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ssh-key
-          path: ${{ secrets.SSH_PRIVATE_KEY }}
+          path: ${{ secrets.DIGITALOCEAN_SSH_KEY }}
 
       - name: Deploy to Droplet
-        uses: actions/ssh-action@master
+        uses: actions/checkout@v2
         with:
-          host: ${{ secrets.DROPLET_IP }}
+          host: ${{ secrets.HOST }}
           username: root
           private-key: ${{ steps.copy-ssh-key.outputs.path }}
 
-
-      - name: Deploy to Droplet
-        uses: actions/ssh-action@master
-        with:
-          host: ${{ secrets.DROPLET_IP }}
-          username: root
-          private-key: ${{ steps.copy-ssh-key.outputs.path }}
           script: |
-            docker login -u ${{ secrets.REGISTRY_USER }} -p ${{ secrets.REGISTRY_PASSWORD }} ${{ secrets.REGISTRY_URL }}
-            docker pull ${{ secrets.REGISTRY_URL }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
-            docker stop ${{ env.CONTAINER_NAME }} ||
+            
+            docker login -u ${{ secrets.DIGITALOCEAN_API_TOKENP }} -p ${{ secrets.DIGITALOCEAN_API_TOKENP }} registry.digitalocean.com
+            docker pull registry.digitalocean.com/urevise-frontend/urevise:latest
+            docker stop urevise ||
+            docker stop urevise
+            # Remove old container
+            # docker rm $(echo $IMAGE_NAME)
+            docker rm urevise
+            # Run a new container from a new image
+            docker run -d 
+            --restart always \
+            --name urevise
+            # --name $(echo $IMAGE_NAME) \
 
     # script: |
     #   docker login -u ${{ secrets.REGISTRY_USER }} -p ${{ secrets.REGISTRY_PASSWORD }} ${{ secrets.REGISTRY_URL }}
