@@ -44,7 +44,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.MAC-SSH-KEY}}
+          key: ${{ secrets.DIGITALOCEAN_SSH_PUBLIC_KEY}}
           # passphrase: ${{ secrets.PASSPHRASE }}
           # envs: IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_API_TOKENP }},GITHUB_SHA
           script: |
