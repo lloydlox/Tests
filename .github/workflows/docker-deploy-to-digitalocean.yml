@@ -43,8 +43,9 @@ jobs:
         uses: appleboy/ssh-action@v0.1.3
         with:
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
+          username: lloydt
           key: ${{ secrets.DIGITALOCEAN_SSH_PUBLIC_KEY}}
+          passphrase: gemun6dd
           # passphrase: ${{ secrets.PASSPHRASE }}
           # envs: IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_API_TOKENP }},GITHUB_SHA
           script: |
