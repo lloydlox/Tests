@@ -47,6 +47,7 @@ jobs:
           key: ${{ secrets.DIGITALOCEAN_SSH_PUBLIC_KEY}}
           passphrase: gemun6dd
           # passphrase: ${{ secrets.PASSPHRASE }}
+          
           # envs: IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_API_TOKENP }},GITHUB_SHA
           script: |
             # Login to registry
