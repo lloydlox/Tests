@@ -54,7 +54,7 @@ jobs:
 
           script: |
             # docker login -u ${{ secrets.DIGITALOCEAN_API_TOKENP }} registry.digitalocean.com/urevise-frontend
-            docker login -u root ${{ secrets.MAC-SSH-KEY}} ${secrets.HOST}
+            docker login -u root ${{ secrets.MAC_SSH_PRIVATE_KEY}} ${secrets.HOST}
 
             docker pull registry.digitalocean.com/urevise-frontend/urevise:latest
             docker stop urevise
