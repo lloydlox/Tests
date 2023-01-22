@@ -56,7 +56,6 @@ jobs:
             
             docker login -u ${{ secrets.DIGITALOCEAN_API_TOKENP }} -p ${{ secrets.DIGITALOCEAN_API_TOKENP }} registry.digitalocean.com
             docker pull registry.digitalocean.com/urevise-frontend/urevise:latest
-            docker stop urevise ||
             docker stop urevise
             # Remove old container
             # docker rm $(echo $IMAGE_NAME)
@@ -83,7 +82,7 @@ jobs:
     #         docker stop urevise
     #         # Remove old container
     #         # docker rm $(echo $IMAGE_NAME)
-    #         doscker rm urevise
+    #         docker rm urevise
     #         # Run a new container from a new image
     #         docker run -d 
     #         --restart always \
