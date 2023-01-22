@@ -40,13 +40,13 @@ jobs:
     
     steps:
       - name: Copy SSH key
-        uses: appleboy/ssh-action@v0.1.7
+        uses: appleboy/ssh-action@v0.1.3
         with:
           name: ssh-key
           path: ${{ secrets.DIGITALOCEAN_SSH_KEY }}
 
       - name: Deploy to Droplet
-        uses: appleboy/ssh-action@v0.1.7
+        uses: appleboy/ssh-action@v0.1.3
         with:
           host: ${{ secrets.HOST }}
           username: root
