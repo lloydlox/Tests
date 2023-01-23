@@ -33,11 +33,13 @@ jobs:
 
         # run: docker push rgiegistry.ditalocean.com/urevise-frontend:${{ github.event.inputs.version }}
 
-      - name: DigitalOcean App Platform deployment
-        uses: digitalocean/app_action@main
+      - name: Deploy to DigitalOcean
+        uses: do-actions/deploy@v1.1.0
         with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-          script: |
+           api_token: ${{ secrets.DIGITALOCEAN_API_TOKEN }}
+           ssh_key: ${{ secrets.DIGITALOCEAN_SSH_PUBLIC_KEY }}
+           droplet_id: ${{ secrets.DROPLET_IP }}
+           script: |
             docker pull registry.digitalocean.com/urevise-frontend/urevise:latest
             docker stop urevise
             # Remove old container
