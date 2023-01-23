@@ -39,18 +39,21 @@ jobs:
     needs: build_and_push
     
     steps:
-      - name: Copy SSH key
-        uses: appleboy/ssh-action@v0.1.3
-        with:
-          name: ssh-key
-          path: ${{ secrets.DIGITALOCEAN_SSH_KEY }}
+      - name: Login to the DigitalOcean Registry
+        run: |
+          echo ${{ secrets.DIGITALOCEAN_API_TOKENP }} | docker login -u __token --password-stdin registry.digitalocean.com
+      # - name: Copy SSH key
+      #   uses: appleboy/ssh-action@v0.1.3
+      #   with:
+      #     name: ssh-key
+      #     path: ${{ secrets.DIGITALOCEAN_SSH_KEY }}
 
-      - name: Deploy to Droplet
-        uses: appleboy/ssh-action@v0.1.3
-        with:
-          host: ${{ secrets.HOST }}
-          username: root
-          private-key: ${{ steps.copy-ssh-key.outputs.path }}
+      # - name: Deploy to Droplet
+      #   uses: appleboy/ssh-action@v0.1.3
+      #   with:
+      #     host: ${{ secrets.HOST }}
+      #     username: root
+      #     private-key: ${{ steps.copy-ssh-key.outputs.path }}
 
           script: |
              docker login -u ${{ secrets.DIGITALOCEAN_API_TOKENP }} -p ${{ secrets.DIGITALOCEAN_API_TOKENP }} registry.digitalocean.com/urevise-frontend
