@@ -33,12 +33,12 @@ jobs:
 
         # run: docker push rgiegistry.ditalocean.com/urevise-frontend:${{ github.event.inputs.version }}
 
-      - name: Deploy to DigitalOcean
-        uses: digitalocean/app_action@main
+      - name: Deploy to DigitalOcean Droplet
+        uses: appleboy/ssh-action@v0.1.7
         with:
            api_token: ${{ secrets.DIGITALOCEAN_API_TOKENP }}
-           ssh_key: ${{ secrets.DIGITALOCEAN_SSH_PUBLIC_KEY }}
-           droplet_id: ${{ secrets.DROPLET_IP }}
+           key: ${{ secrets.DIGITALOCEAN_SSH_PUBLIC_KEY }}
+           host: ${{ secrets.DROPLET_IP }}
            script: |
             docker pull registry.digitalocean.com/urevise-frontend/urevise:latest
             docker stop urevise
