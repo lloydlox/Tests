@@ -1,0 +1,49 @@
+name: Build ,DEPLOY
+
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       version:
+#         description: 'Image version'
+#         required: true
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo 
+        uses: actions/checkout@v2
+      - name: Build image 
+        run: docker build -t urevise .
+      - name: Install doctl 
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_API_TOKENP }}
+      - name: Log in to DO Container Registry 
+        run: doctl registry login --expiry-seconds 600
+      - name: Tag image 
+        run:
+          docker tag urevise registry.digitalocean.com/urevise-frontend/urevise
+          # docker tag urevise registry.digitalocean.com/urevise-frontend:${{github.event.inputs.version }}
+      - name: Push image to DO Container Registry 
+        run: docker push registry.digitalocean.com/urevise-frontend/urevise
+
+        # run: docker push rgiegistry.ditalocean.com/urevise-frontend:${{ github.event.inputs.version }}
+
+      - name: DigitalOcean App Platform deployment
+        uses: digitalocean/app_action@main
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          script: |
+            docker pull registry.digitalocean.com/urevise-frontend/urevise:latest
+            docker stop urevise
+            # Remove old container
+            # docker rm $(echo $IMAGE_NAME)
+            docker rm urevise
+            # Run a new container from a new image
+            docker run -d 
+            --restart always \
+            --name urevise
