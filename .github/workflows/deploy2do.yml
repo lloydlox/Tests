@@ -36,7 +36,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build_and_push
-    # run: docker push rgiegistry.ditalocean.com/urevise-frontend:${{ github.event.inputs.version }}
+    #run: docker push rgiegistry.ditalocean.com/urevise-frontend:${{ github.event.inputs.version }}
     steps:
       - name: Deploy to DigitalOcean Droplet
         uses: appleboy/ssh-action@v0.1.7
