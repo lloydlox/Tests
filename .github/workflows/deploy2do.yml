@@ -36,7 +36,7 @@ jobs:
       - name: Deploy to DigitalOcean
         uses: digitalocean/app_action@main
         with:
-           api_token: ${{ secrets.DIGITALOCEAN_API_TOKEN }}
+           api_token: ${{ secrets.DIGITALOCEAN_API_TOKENP }}
            ssh_key: ${{ secrets.DIGITALOCEAN_SSH_PUBLIC_KEY }}
            droplet_id: ${{ secrets.DROPLET_IP }}
            script: |
