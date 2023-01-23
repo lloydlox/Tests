@@ -38,19 +38,10 @@ jobs:
     needs: build_and_push
     # run: docker push rgiegistry.ditalocean.com/urevise-frontend:${{ github.event.inputs.version }}
     steps:
-      - name: Set up SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.MAC_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 700 ~/.ssh/id_rsa
-          echo "${{ secrets.DIGITALOCEAN_SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
-          chmod 700 ~/.ssh/id_rsa.pub
-          ssh-keyscan -H ${{ secrets.DROPLET_IP}} >> ~/.ssh/known_hosts
-
       - name: Deploy to DigitalOcean Droplet
         uses: appleboy/ssh-action@v0.1.7
         with:
-           key: ${{ secrets.DIGITALOCEAN_SSH_PUBLIC_KEY }}
+           key: ${{ secrets.MG_PC_TO_DO_PRIVATE }}
            host: ${{ secrets.DROPLET_IP }}
            envs: IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},GITHUB_SHA
            script: |
