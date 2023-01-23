@@ -41,7 +41,7 @@ jobs:
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.DIGITALOCEAN_SSH_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.MAC_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 700 ~/.ssh/id_rsa
           echo "${{ secrets.DIGITALOCEAN_SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
           chmod 700 ~/.ssh/id_rsa.pub
@@ -51,7 +51,7 @@ jobs:
         uses: appleboy/ssh-action@v0.1.7
         with:
            api_token: ${{ secrets.DIGITALOCEAN_API_TOKENP }}
-           key: ${{ secrets.DIGITALOCEAN_SSH_KEY }}
+           key: ${{ secrets.MAC_SSH_PRIVATE_KEY }}
            host: ${{ secrets.DROPLET_IP }}
            envs: IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},GITHUB_SHA
            script: |
