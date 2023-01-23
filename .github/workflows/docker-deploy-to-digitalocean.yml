@@ -53,7 +53,7 @@ jobs:
           private-key: ${{ steps.copy-ssh-key.outputs.path }}
 
           script: |
-             docker login -u ${{ secrets.DIGITALOCEAN_API_TOKENP }} registry.digitalocean.com/urevise-frontend
+             docker login -u ${{ secrets.DIGITALOCEAN_API_TOKENP }} -p ${{ secrets.DIGITALOCEAN_API_TOKENP }} registry.digitalocean.com/urevise-frontend
             # docker login -u root ${{ secrets.MAC_SSH_PRIVATE_KEY}} ${secrets.HOST}
 
             docker pull registry.digitalocean.com/urevise-frontend/urevise:latest
