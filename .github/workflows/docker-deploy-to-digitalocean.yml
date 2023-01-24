@@ -1,41 +1,56 @@
-name: Build and publish manually
+name: Build ,DEPLOY
 
-
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       version:
+#         description: 'Image version'
+#         required: true
 on:
   push:
     branches: [main]
-
+env:
+  REGISTRY: registry.digitalocean.com/urevise-frontend
+  IMAGE_NAME: urevise
+  
 jobs:
-  deploy:
+  build_and_push:
     runs-on: ubuntu-latest
-    #needs: build_and_push
-    
+    steps:
+      - name: Checkout the repo 
+        uses: actions/checkout@v2
+      - name: Build image 
+        run: docker build -t urevise .
+      - name: Install doctl 
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_API_TOKENP }}
+      - name: Log in to DO Container Registry 
+        run: doctl registry login --expiry-seconds 600
+      - name: Tag image 
+        run:
+          docker tag urevise registry.digitalocean.com/urevise-frontend/urevise
+          # docker tag urevise registry.digitalocean.com/urevise-frontend:${{github.event.inputs.version }}
+      - name: Push image to DO Container Registry 
+        run: docker push registry.digitalocean.com/urevise-frontend/urevise
+        
+        
+  Deploy:
+    runs-on: ubuntu-latest
+    needs: build_and_push
+
     steps:
       - name: Deploy to Digital Ocean droplet via SSH action
         uses: appleboy/ssh-action@v0.1.3
         with:
-          HOST: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-      - name: Login to the DigitalOcean Registry
-        run: |
-          echo ${{ secrets.DIGITALOCEAN_API_TOKENP }} | docker login -u __token --password-stdin registry.digitalocean.com
-      # - name: Copy SSH key
-      #   uses: appleboy/ssh-action@v0.1.3
-      #   with:
-      #     name: ssh-key
-      #     path: ${{ secrets.DIGITALOCEAN_SSH_KEY }}
-
-      # - name: Deploy to Droplet
-      #   uses: appleboy/ssh-action@v0.1.3
-      #   with:
-      #     host: ${{ secrets.HOST }}
-      #     username: root
-      #     private-key: ${{ steps.copy-ssh-key.outputs.path }}
-
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSHKEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          envs: IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},GITHUB_SHA
           script: |
-             docker login -u ${{ secrets.DIGITALOCEAN_API_TOKENP }} -p ${{ secrets.DIGITALOCEAN_API_TOKENP }} registry.digitalocean.com/urevise-frontend
+            docker login -u ${{ secrets.DIGITALOCEAN_API_TOKENP }} -p ${{ secrets.DIGITALOCEAN_API_TOKENP }} registry.digitalocean.com/urevise-frontend
             # docker login -u root ${{ secrets.MAC_SSH_PRIVATE_KEY}} ${secrets.HOST}
-
             docker pull registry.digitalocean.com/urevise-frontend/urevise:latest
             docker stop urevise
             # Remove old container
@@ -46,5 +61,3 @@ jobs:
             --restart always \
             --name urevise
             # --name $(echo $IMAGE_NAME) \
-
-    
