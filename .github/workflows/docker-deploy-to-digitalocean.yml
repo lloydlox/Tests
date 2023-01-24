@@ -49,7 +49,7 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           envs: IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},GITHUB_SHA
           script: |
-            docker login -u ${{ secrets.DIGITALOCEAN_API_TOKENP }} -p ${{ secrets.DIGITALOCEAN_API_TOKENP }} registry.digitalocean.com
+            docker login registry.digitalocean.com
             # docker login -u root ${{ secrets.MAC_SSH_PRIVATE_KEY}} ${secrets.HOST}
             docker pull registry.digitalocean.com/urevise-frontend/urevise:latest
             docker stop urevise
