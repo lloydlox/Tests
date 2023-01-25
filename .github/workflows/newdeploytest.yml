@@ -28,7 +28,7 @@ jobs:
       uses: easingthemes/ssh-deploy@main
       env:
        SSH_PRIVATE_KEY: ${{ secrets.MG_PC_TO_DO_PRIVATE }}
-       REMOTE_USER: ${{ secrets.REMOTE_USER }}
+       REMOTE_USER: ${{ secrets.USERNAME }}
        REMOTE_HOST: ${{ secrets.DROPLET_IP }}
        SCRIPT_AFTER: |
           cd /var/www/my-app
