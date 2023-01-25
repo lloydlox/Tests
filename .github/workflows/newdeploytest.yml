@@ -10,27 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # - name: Checkout code
-    #   uses: actions/checkout@v2
+    - name: SSH into DigitalOcean Droplet
+      uses: appleboy/ssh-action@v0.1.7
+      with:
+       key: ${{ secrets.MG_PC_TO_DO_PRIVATE }}
+       host: ${{ secrets.HOST }}
+       username: root
+       script: |
+           docker pull registry.digitalocean.com/urevise-frontend/urevise:latest
 
-    # - name: Set up Node.js
-    #   uses: actions/setup-node@v2
-    #   with:
-    #     node-version: 14
-
-    # - name: Install dependencies
-    #   run: rm -rf node_modules && yarn install --frozen-lockfile
-
-    # - name: Build application
-    
-    #   run: yarn run build
-
-    - name: Deploy to DigitalOcean
-      uses: easingthemes/ssh-deploy@main
-      env:
-       SSH_PRIVATE_KEY: ${{ secrets.MG_PC_TO_DO_PRIVATE }}
-       REMOTE_USER: root
-       REMOTE_HOST: ${{ secrets.HOST }}
-       SCRIPT: |
-          cd /var/www/my-app
-          ls-a
