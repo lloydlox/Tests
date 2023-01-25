@@ -22,6 +22,7 @@ jobs:
     #   run: rm -rf node_modules && yarn install --frozen-lockfile
 
     # - name: Build application
+    
     #   run: yarn run build
 
     - name: Deploy to DigitalOcean
