@@ -27,7 +27,7 @@ jobs:
     - name: Deploy to DigitalOcean
       uses: easingthemes/ssh-deploy@main
       env:
-       SSH_PRIVATE_KEY: ${{ secrets.MG_PC_TO_DO_PRIVATE }}
+       SSH_PRIVATE_KEY: ${{ secrets.MAC_SSH_PRIVATE_KEY }}
        REMOTE_USER: ${{ secrets.USERNAME }}
        REMOTE_HOST: ${{ secrets.DROPLET_IP }}
        SCRIPT: |
