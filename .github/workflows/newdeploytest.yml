@@ -13,7 +13,7 @@ jobs:
     - name: SSH into DigitalOcean Droplet
       uses: appleboy/ssh-action@v0.1.7
       with:
-       key: ${{ secrets.SSH_KEY }}
+       key: ${{ secrets.DIGITALOCEANSSH_KEY }}
        host: ${{ secrets.HOST }}
        username: root
        script: |
