@@ -27,10 +27,9 @@ jobs:
     - name: Deploy to DigitalOcean
       uses: easingthemes/ssh-deploy@main
       env:
-        SSH_PRIVATE_KEY:${{ secrets.MG_PC_TO_DO_PRIVATE }}
-        # api_token: ${{ secrets.DIGITALOCEAN_API_TOKEN }}
-        REMOTE_USER: root
-        REMOTE_HOST: ${{ secrets.DROPLET_IP }}
-        SCRIPT_AFTER: |
+       SSH_PRIVATE_KEY: ${{ secrets.MG_PC_TO_DO_PRIVATE }}
+       REMOTE_USER: ${{ secrets.REMOTE_USER }}
+       REMOTE_HOST: ${{ secrets.DROPLET_IP }}
+       SCRIPT_AFTER: |
           cd /var/www/my-app
           ls-a
