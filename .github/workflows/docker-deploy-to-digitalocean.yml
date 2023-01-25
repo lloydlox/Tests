@@ -43,11 +43,16 @@ jobs:
       - name: Deploy to Digital Ocean droplet via SSH action
         uses: appleboy/ssh-action@v0.1.3
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
+          host: 157.245.45.58
+          username: root
           key: ${{ secrets.MG_PC_TO_DO_PRIVATE }}
-          passphrase: ${{ secrets.PASSPHRASE }}
-          envs: IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},GITHUB_SHA
+          passphrase: 6985e71baf2ff095b055633127
+          # envs: IMAGE_NAME,REGISTRY,{{ secret
+          # host: ${{ secrets.HOST }}
+          # username: ${{ secrets.USERNAME }}
+          # key: ${{ secrets.MG_PC_TO_DO_PRIVATE }}
+          # passphrase: ${{ secrets.PASSPHRASE }}
+          # envs: IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},GITHUB_SHA
           script: |
             # docker login registry.digitalocean.com
             docker login -u ${{ secrets.DIGITALOCEAN_API_TOKENP}} -p ${DIGITALOCEAN_API_TOKENP}
