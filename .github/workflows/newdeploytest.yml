@@ -1,0 +1,34 @@
+name: Deploy to DigitalOcean
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # - name: Checkout code
+    #   uses: actions/checkout@v2
+
+    # - name: Set up Node.js
+    #   uses: actions/setup-node@v2
+    #   with:
+    #     node-version: 14
+
+    # - name: Install dependencies
+    #   run: rm -rf node_modules && yarn install --frozen-lockfile
+
+    # - name: Build application
+    #   run: yarn run build
+
+    - name: Deploy to DigitalOcean
+      uses: do-actions/deploy@v1.1.0
+      with:
+        api_token: ${{ secrets.DIGITALOCEAN_API_TOKEN }}
+        ssh_key: ${{ secrets.DIGITALOCEAN_SSH_PUBLIC_KEY }}
+        droplet_id: ${{ secrets.DROPLET_IP }}
+        script: |
+          cd /var/www/my-app
