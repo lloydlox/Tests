@@ -48,7 +48,7 @@ jobs:
           key: ${{ secrets.MG_PC_TO_DO_PRIVATE }}
           passphrase: 6985e71baf2ff095b055633127
           # envs: IMAGE_NAME,REGISTRY,{{ secret
-          # host: ${{ secrets.HOST }}
+          # host: ${{ secrets.DROPLET_IP }}
           # username: ${{ secrets.USERNAME }}
           # key: ${{ secrets.MG_PC_TO_DO_PRIVATE }}
           # passphrase: ${{ secrets.PASSPHRASE }}
