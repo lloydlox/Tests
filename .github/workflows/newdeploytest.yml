@@ -24,8 +24,8 @@ jobs:
             # docker rm $(echo $IMAGE_NAME)
             ##docker rm urevise
             # Run a new container from a new image
-            docker run -d 
-            --restart always \
-            --name urevise
+            docker run -d urevise
+            ##--restart always \
+            ##--name urevise
             # --name $(echo $IMAGE_NAME) \
 
