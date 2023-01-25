@@ -29,7 +29,7 @@ jobs:
       env:
        SSH_PRIVATE_KEY: ${{ secrets.MAC_SSH_PRIVATE_KEY }}
        REMOTE_USER: ${{ secrets.USERNAME }}
-       REMOTE_HOST: ${{ secrets.DROPLET_IP }}
+       REMOTE_HOST: ${{ secrets.HOST }}
        SCRIPT: |
           cd /var/www/my-app
           ls-a
