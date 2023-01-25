@@ -22,7 +22,7 @@ jobs:
            docker stop urevise
            # Remove old container
             # docker rm $(echo $IMAGE_NAME)
-            docker rm urevise
+            ##docker rm urevise
             # Run a new container from a new image
             docker run -d 
             --restart always \
