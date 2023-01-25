@@ -30,6 +30,6 @@ jobs:
        SSH_PRIVATE_KEY: ${{ secrets.MG_PC_TO_DO_PRIVATE }}
        REMOTE_USER: ${{ secrets.USERNAME }}
        REMOTE_HOST: ${{ secrets.DROPLET_IP }}
-       SCRIPT_AFTER: |
+       SCRIPT: |
           cd /var/www/my-app
           ls-a
