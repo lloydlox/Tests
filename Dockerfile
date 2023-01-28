@@ -18,6 +18,7 @@ RUN \
 FROM node:16-alpine AS builder
 WORKDIR /urevise
 COPY --from=deps /urevise/node_modules ./node_modules
+COPY --from=deps /urevise/package.json ./package,json
 COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
