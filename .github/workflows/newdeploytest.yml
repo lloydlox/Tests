@@ -25,7 +25,7 @@ jobs:
             ##docker rm urevise
             # Run a new container from a new image
             docker run -d -p 3000:3000 registry.digitalocean.com/urevise-frontend/urevise
-            ##--restart always  \
+            ##--restart always \
             ##--name urevise
             # --name $(echo $IMAGE_NAME) \
 
