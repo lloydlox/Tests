@@ -41,7 +41,7 @@ jobs:
        script: |
            docker login -u ${{ secrets.DIGITALOCEAN_API_TOKENP }} -p ${{ secrets.DIGITALOCEAN_API_TOKENP }} registry.digitalocean.com/urevise-frontend
            docker pull registry.digitalocean.com/urevise-frontend/urevise:latest
-           docker stop urevise
+          #  docker stop urevise
            # Remove old container
             # docker rm $(echo $IMAGE_NAME)
             ##docker rm urevise
