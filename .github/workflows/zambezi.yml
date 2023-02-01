@@ -1,0 +1,51 @@
+name: Build-Deploy-to-DigitalOcean
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo 
+        uses: actions/checkout@v2
+      - name: Build image 
+        run: docker build -t urevise .
+      - name: Install doctl 
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_API_KEY }}
+      - name: Log in to DO Container Registry 
+        run: doctl registry login --expiry-seconds 600
+      - name: Tag image 
+        run:
+          docker tag urevise registry.digitalocean.com/urevise/urevise
+          
+      - name: Push image to DO Container Registry 
+        run: docker push registry.digitalocean.com/urevise
+        
+
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: SSH into DigitalOcean Droplet
+      uses: appleboy/ssh-action@v0.1.7
+      with:
+       key: ${{ secrets.DIGITALOCEAN_SSH_KEY }}
+       host: ${{ secrets.DROPLET_IP }}
+       username: ${{ secrets.USERNAME }}
+       script: |
+           docker login -u ${{ secrets.DIGITALOCEAN_API_KEY }} -p ${{ secrets.DIGITALOCEAN_API_KEY }} registry.digitalocean.com/urevise
+           docker pull registry.digitalocean.com/urevise:latest
+           # docker stop urevise
+           # Remove old container
+            # docker rm $(echo $IMAGE_NAME)
+            # docker rm urevise
+            # Run a new container from a new image
+            docker run -d -p 3000:3000 registry.digitalocean.com/urevise
+            ##--restart always \
+            ##--name urevise
+            # --name $(echo $IMAGE_NAME) \
