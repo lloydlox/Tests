@@ -39,7 +39,7 @@ jobs:
        username: ${{ secrets.USERNAME }}
        script: |
            docker login -u ${{ secrets.DIGITALOCEAN_API_TOKEN }} -p ${{ secrets.DIGITALOCEAN_API_TOKEN }} registry.digitalocean.com/urevise
-           docker pull registry.digitalocean.com/urevise:latest
+           docker pull registry.digitalocean.com/urevise/urevise:latest
            # docker stop urevise
            # Remove old container
             # docker rm $(echo $IMAGE_NAME)
