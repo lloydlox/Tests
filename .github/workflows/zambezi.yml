@@ -20,10 +20,10 @@ jobs:
         run: doctl registry login --expiry-seconds 600
       - name: Tag image 
         run:
-          docker tag urevise registry.digitalocean.com/urevise/urevise
+          docker tag urevise registry.digitalocean.com/urevise/urevise:${{github.event.inputs.version }}
           
       - name: Push image to DO Container Registry 
-        run: docker push registry.digitalocean.com/urevise
+        run: docker push registry.digitalocean.com/urevise/urevise:${{github.event.inputs.version }}
         
 
 
