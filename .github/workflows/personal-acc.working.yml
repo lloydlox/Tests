@@ -37,11 +37,11 @@ jobs:
       with:
        key: ${{ secrets.DIGITALOCEAN_SSH_KEY }}
        host: ${{ secrets.HOST }}
-       container_name: $(docker inspect -f '{{.Name}}' $(docker ps -q))
        username: root
        script: |
            docker login -u ${{ secrets.DIGITALOCEAN_API_TOKENP }} -p ${{ secrets.DIGITALOCEAN_API_TOKENP }} registry.digitalocean.com/urevise-frontend
            docker pull registry.digitalocean.com/urevise-frontend/urevise:latest
+           container_name=$(docker inspect -f '{{.Name}}' $(docker ps -q))
            docker stop "$container_name"
            docker rm "$container_name"
            # Remove old container
