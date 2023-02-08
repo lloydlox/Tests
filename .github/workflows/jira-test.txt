@@ -1,0 +1,24 @@
+name: Jira Webhook Trigger
+
+on:
+  webhook:
+    types: [jira]
+
+jobs:
+  jira_webhook:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check if Jira webhook is triggered
+      run: echo "Jira webhook was triggered successfully."
+
+    - name: Check payload
+      run: echo "${{ toJson(github.event.request) }}"
+
+    - name: Clone the repository
+      uses: actions/checkout@v2
+
+    - name: Run some scripts
+      run: |
+        echo "Running scripts to update the repository based on Jira issue data."
+        # Your scripts here
