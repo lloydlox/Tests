@@ -1,5 +1,5 @@
-name: Jira Repository Dispatch Trigger
-
+# name: Jira Repository Dispatch Trigger
+name: No name
 on:
   repository_dispatch:
 

@@ -1,9 +1,13 @@
-name: Deploy to DigitalOcean
+# name: Deploy to DigitalOcean
+
+# on:
+#   push:
+#     branches:
+#       - main
+name: Jira Repository Dispatch Trigger
 
 on:
-  push:
-    branches:
-      - main
+  repository_dispatch:
 
 jobs:
   build_and_push:
