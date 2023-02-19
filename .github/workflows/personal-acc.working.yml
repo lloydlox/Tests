@@ -3,7 +3,7 @@
 # on:
 #   push:
 #     branches:
-#       - main
+#       - ShouldBemain
 name: Jira Repository Dispatch Trigger
 
 on:
