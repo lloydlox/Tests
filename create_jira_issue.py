@@ -39,7 +39,7 @@ response = requests.post(jira_url, headers=headers, auth=auth, json=payload)
 if response.status_code == 201:
     print('Issue created successfully')
     # Set up the API endpoint and headers
-    api_url = "https://your-jira-server.com/rest/webhooks/1.0/webhook"
+    api_url = "https://afridao.atlassian.net/rest/webhooks/1.0/webhook"
     headers = {"Content-Type": "application/json"}
     # Set up the webhook payload
     webhook_payload = {
