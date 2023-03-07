@@ -1,0 +1,5 @@
+The  script generated pipeline is now set and it is able to create an issue in Jira when there is a merge to the master branch.  In the same script a webhook is also created that listens to when the Jira issue changes status to closed. Although working, there are aspects of the process that  needs to be optimised and be able to do the following:
+
+The issues created by the pipeline should be assigned to a specific user. I have not been able to achive this, The issue is created but unassigned.
+
+The webhook should only be triggered when an issue assigned to the issue in 1 changes status to Done> Alternatively the webhook should trace the status of the created issue in 1 and be triggered if the status changes to Done
