@@ -1,23 +1,51 @@
-# name: Jira Repository Dispatch Trigger
-name: No name
+name: Jira Repository Dispatch Trigger
+
 on:
   repository_dispatch:
 
 jobs:
-  jira_dispatch:
+  build_and_push:
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo 
+        uses: actions/checkout@v2
+      - name: Build image 
+        run: docker build -t urevise .
+      - name: Install doctl 
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_API_KEY }}
+      - name: Log in to DO Container Registry 
+        run: doctl registry login --expiry-seconds 600
+      - name: Tag image 
+        run:
+          docker tag urevise registry.digitalocean.com/urevise/urevise:latest
+          
+      - name: Push image to DO Container Registry 
+        run: docker push registry.digitalocean.com/urevise/urevise:latest
+        
+
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build_and_push
 
     steps:
-    - name: Check if Jira repository dispatch is triggered
-      run: echo "Jira repository dispatch was triggered successfully."
-
-    - name: Check payload
-      run: echo "${{ toJson(github.event.client_payload) }}"
-
-    - name: Clone the repository
-      uses: actions/checkout@v2
-
-    - name: Run some scripts
-      run: |
-        echo "Running scripts to update the repository based on Jira issue data."
-        # Your scripts here
+    - name: SSH into DigitalOcean Droplet
+      uses: appleboy/ssh-action@v0.1.7
+      with:
+       key: ${{ secrets.DIGITALOCEAN_SSH_KEY }}
+       host: ${{ secrets.DROPLET_IP }}
+       username: ${{ secrets.USERNAME }}
+       script: |
+           docker login -u ${{ secrets.DIGITALOCEAN_API_KEY }} -p ${{ secrets.DIGITALOCEAN_API_KEY }} registry.digitalocean.com/urevise
+           docker pull registry.digitalocean.com/urevise/urevise:latest
+           # get the name of the running container
+           container_name=$(docker inspect -f '{{.Name}}' $(docker ps -q))
+           # stop the container
+            docker stop "$container_name"
+           # Remove old container
+            docker rm "$container_name"
+            # Run a new container from a new image
+            docker run -d -p 3000:3000 registry.digitalocean.com/urevise/urevise
+          
