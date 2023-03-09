@@ -9,7 +9,7 @@ jira_url = 'https://afridao.atlassian.net/rest/api/2/issue/'
 user = 'lloydlox@yahoo.co.uk'
 # Get the Jira API key from the environment variable
 # apikey = os.environ['JIRA_API_KEY']
-apikey= "ATATT3xFfGF0F26BSb05l4W0qlSyjcNShqstsDjZOCpHz4pgzXQZ4KacyCUr8B29CDApcx9v9Vuk7ngB5G9ps2RUj9K1lClq1t-0o5XI_eM2ktVTcVWdqye0Db90f2dCseOIPldkJtdxOnqqZm1o6c9FgbZbL5e9M3HwkUVo4iNgp7PqNtHhMWg=D02EA5AB"
+apikey= "xxxxxxxxxxxxxxxx"
 issue_key= "UEP-123"
 # # Define the fields for the new issue
 # fields = {
@@ -73,7 +73,7 @@ webhook_payload = {
 json_payload = json.dumps(webhook_payload)
 
     # Send the API request to create the webhook
-response = requests.post(webhook_url, data=json_payload, headers=webhook_headers, auth=("lloydlox@yahoo.co.uk", "ATATT3xFfGF0F26BSb05l4W0qlSyjcNShqstsDjZOCpHz4pgzXQZ4KacyCUr8B29CDApcx9v9Vuk7ngB5G9ps2RUj9K1lClq1t-0o5XI_eM2ktVTcVWdqye0Db90f2dCseOIPldkJtdxOnqqZm1o6c9FgbZbL5e9M3HwkUVo4iNgp7PqNtHhMWg=D02EA5AB"))
+response = requests.post(webhook_url, data=json_payload, headers=webhook_headers, auth=("lloydlox@yahoo.co.uk", "mmmmmmm"))
 
 
     # Check the response status code
@@ -93,7 +93,7 @@ github_json_payload = json.dumps(github_payload)
 # Send the API request to trigger the GitHub Repository Dispatch webhook
 github_webhook_url = "https://api.github.com/repos/zambezidao/urevise-frontend/dispatches"
 github_webhook_headers = {
-  'Authorization': 'Bearer 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',
+  'Authorization': 'Bearer mmmmmm',
   'Content-Type': 'text/plain'
 }
 github_webhook_response = requests.post(github_webhook_url, data=github_json_payload, headers=github_webhook_headers)

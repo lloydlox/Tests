@@ -10,10 +10,10 @@ user = 'lloydlox@yahoo.co.uk'
 # Get the Jira API key from the environment variable
 apikey = os.environ['JIRA_API_KEY']
 
+
 #  Get the Github token
 github_token = os.environ.get('TOKEN_GITHUB')
 
-# apikey= "ATATT3xFfGF0F26BSb05l4W0qlSyjcNShqstsDjZOCpHz4pgzXQZ4KacyCUr8B29CDApcx9v9Vuk7ngB5G9ps2RUj9K1lClq1t-0o5XI_eM2ktVTcVWdqye0Db90f2dCseOIPldkJtdxOnqqZm1o6c9FgbZbL5e9M3HwkUVo4iNgp7PqNtHhMWg=D02EA5AB"
 
 # Define the fields for the new issue
 fields = {
@@ -21,10 +21,7 @@ fields = {
     'issuetype': {'id': '10009'},
     'summary': 'DEPLOY TO PRODUCTION',
     'description': 'Creating of an issue using project keys and issue type names using the REST API',
-    # 'customfield_10000': 'Custom field value' # Example custom field
-    "assignee": {
-            "name": "george mukwewa"
-    }
+    
 }
 
 # Construct the JSON payload
@@ -47,7 +44,19 @@ auth = (user, apikey)
 response = requests.post(jira_url, headers=headers, auth=auth, json=payload)
 
 # Parse the JSON response to extract the issue key
-issue_key = json.loads(response.text)['key']
+# issue_key = json.loads(response.text)['key']
+# 
+# 
+# response = requests.get('https://example.com/api/endpoint')
+if response.ok:
+    try:
+        issue_key = json.loads(response.text)['key']
+        # Do something with the issue_key
+    except KeyError as e:
+        print(f'Error: Key "{e.args[0]}" not found in response.')
+else:
+    print(f'Error: HTTP status code {response.status_code}')
+    print(response.text)
 
 # Set up the JSON payload for updating the issue
 update_payload = json.dumps( {
