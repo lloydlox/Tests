@@ -69,7 +69,7 @@ update_headers = {
 }
 
 # Set up the API endpoint URL for updating the issue
-update_url = 'https://afridao.atlassian.net/rest/api/2/issue/{}/assignee'.format(issue_key)
+update_url = 'https://afridao.atlassian.net/rest/api/2/issue/{}/assignee'# .format(issue_key)
 
 # Make the API request to update the issue
 update_response = requests.request(
