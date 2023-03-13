@@ -39,7 +39,7 @@
 # import json
 
 # url = "https://afridao.atlassian.net/rest/api/2/automation/rule"
-# api_token = "ATATT3xFfGF0qtYl2wdPjs9f2MLs3pCPyG4tgDWBsEpFWaGMwc0HUaYz6gEBGA872wNXJNfvJkrzJnw3C7ekMqtMmvz1Tk_bESwNQgFcxOXmAqldesany5eHNoXHj8hGb_SBxhrLc4nOurLZL3R8LqN26J_atEOglx99YxYQz_BIfY5hA3j0AAQ=ACFA7A0B"
+# api_token = "xxxxxxxxxxx"
 
 # data = {
 #     "name": "My Automation Rule",
@@ -96,7 +96,7 @@ import requests
 import json
 
 url = "https://afridao.atlassian.net/rest/automation/1.0/rule"
-api_token = "ATATT3xFfGF0qtYl2wdPjs9f2MLs3pCPyG4tgDWBsEpFWaGMwc0HUaYz6gEBGA872wNXJNfvJkrzJnw3C7ekMqtMmvz1Tk_bESwNQgFcxOXmAqldesany5eHNoXHj8hGb_SBxhrLc4nOurLZL3R8LqN26J_atEOglx99YxYQz_BIfY5hA3j0AAQ=ACFA7A0B"
+api_token = "xxxxxx"
 
 
 data = {
