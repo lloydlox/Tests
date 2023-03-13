@@ -75,13 +75,12 @@
 # import requests
 
 # # Create a JIRA instance using your JIRA server URL and API token
-# jira = JIRA(server='https://afridao.atlassian.net/rest/api/2/automation/rule', basic_auth=('lloydlox@yahoo.co.uk', 'ATATT3xFfGF0qtYl2wdPjs9f2MLs3pCPyG4tgDWBsEpFWaGMwc0HUaYz6gEBGA872wNXJNfvJkrzJnw3C7ekMqtMmvz1Tk_bESwNQgFcxOXmAqldesany5eHNoXHj8hGb_SBxhrLc4nOurLZL3R8LqN26J_atEOglx99YxYQz_BIfY5hA3j0AAQ=ACFA7A0B'))
-
+# jira = JIRA(server='https://afridao.atlassian.net/rest/api/2/automation/rule', basic_auth=('lloydlox@yahoo.co.uk', "xxxxxxx"
 # # Define the payload and headers for the API request
 # url = "https://api.github.com/repos/zambezidao/urevise-frontend/dispatches"
 # payload = "{\n    \"event_type\": \"Jira Repository Dispatch Trigger\"\n}"
 # headers = {
-#   'Authorization': 'Bearer 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',
+#   'Authorization': 'Bearer gggggggggggggggg',
 #   'Content-Type': 'text/plain'
 # }
 

@@ -7,7 +7,7 @@
 #   "event_type": "Jira Repository Dispatch Trigger"
 # })
 # headers = {
-#   'Authorization': 'Bearer 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',
+#   'Authorization': 'Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
 #   'Content-Type': 'application/json'
 # }
 
@@ -35,7 +35,7 @@ payload = {
 }
 
 headers = {
-    "Authorization": "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",
+    "Authorization": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
     "Accept": "application/vnd.github.v3+json",
     "X-GitHub-Api-Version": "2022-11-28"
 }

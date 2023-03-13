@@ -9,7 +9,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 # Set the Jira API endpoint URL and credentials
 jira_url = "https://afridao.atlassian.net"
-api_token = "ATATT3xFfGF0qtYl2wdPjs9f2MLs3pCPyG4tgDWBsEpFWaGMwc0HUaYz6gEBGA872wNXJNfvJkrzJnw3C7ekMqtMmvz1Tk_bESwNQgFcxOXmAqldesany5eHNoXHj8hGb_SBxhrLc4nOurLZL3R8LqN26J_atEOglx99YxYQz_BIfY5hA3j0AAQ=ACFA7A0B"
+api_token = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 headers = {
     "Authorization": f"Bearer {api_token}",
     "Content-Type": "application/json"
@@ -42,7 +42,7 @@ payload = {
 }
 
 # Send the POST request to create the automation rule
-url = "https://afridao.atlassian.net/rest/api/3/automation/rule"
+url = "https://afridao.atlassian.net/rest/api/2/automation/rule"
 # url = f"{jira_url}/rest/automation/1.0/rule"
 response = requests.post(url, headers=headers, data=json.dumps(payload))
 
