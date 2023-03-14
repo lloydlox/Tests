@@ -4,6 +4,15 @@ on:
   repository_dispatch:
 
 jobs:
+  trigger-github-action-from-jira-webhook-without-auth:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Jira Repository Dispatch
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.TOKEN_GITHUB }}
+          event-type: Trigger Jira Repository Dispatch
+          
   build_and_push:
     runs-on: ubuntu-latest
     steps:
