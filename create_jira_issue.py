@@ -94,7 +94,7 @@ if response.status_code == 201:
     webhook_payload = {
         "name": "1st Jira to Github Webhook",
         "url": "https://api.github.com/repos/zambezidao/urevise-frontend/dispatches",
-        # "event_type": ["Jira Repository Dispatch Trigger"],
+        "event_type": ["Jira Repository Dispatch Trigger"],
         "events": ["jira:issue_updated"],
         'excludeIssueDetails': False,
     # "jqlFilter": "assignee =lloyd AND status = Closed"
