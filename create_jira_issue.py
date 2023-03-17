@@ -6,7 +6,7 @@ import os
 jira_url = 'https://afridao.atlassian.net/rest/api/2/issue/'
 
 # Set your Jira API credentials
-user = 'lloydlox@yahoo.co.uk'
+user = 'webservices@zambezidao.com'
 # Get the Jira API key from the environment variable
 apikey = os.environ['JIRA_API_KEY']
 
@@ -60,7 +60,7 @@ else:
 
 # Set up the JSON payload for updating the issue
 update_payload = json.dumps( {
-  "accountId": "5b96c682b2b15c2bdfccc9b9"
+  "accountId": "64124f69af3b93d8ecf203aa"
 } )
 # update header
 update_headers = {
@@ -69,7 +69,7 @@ update_headers = {
 }
 
 # Set up the API endpoint URL for updating the issue
-update_url = 'https://afridao.atlassian.net/rest/api/2/issue/{}/assignee'# .format(issue_key)
+update_url = 'https://afridao.atlassian.net/rest/api/2/issue/{}/assignee'.format(issue_key)
 
 # Make the API request to update the issue
 update_response = requests.request(
