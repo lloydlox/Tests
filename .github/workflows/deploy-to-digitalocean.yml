@@ -23,7 +23,7 @@ jobs:
       - name: Install doctl 
         uses: digitalocean/action-doctl@v2
         with:
-          token: ${{ secrets.DIGITALOCEAN_API_KEY }}
+          token: ${{ secrets.DIGITALOCEAN_API_TOKENP}}
       - name: Log in to DO Container Registry 
         run: doctl registry login --expiry-seconds 600
       - name: Tag image 
@@ -47,7 +47,7 @@ jobs:
        host: ${{ secrets.DROPLET_IP }}
        username: ${{ secrets.USERNAME }}
        script: |
-           docker login -u ${{ secrets.DIGITALOCEAN_API_KEY }} -p ${{ secrets.DIGITALOCEAN_API_KEY }} registry.digitalocean.com/urevise
+           docker login -u ${{ secrets.DIGITALOCEAN_API_TOKENP }} -p ${{ secrets.DIGITALOCEAN_API_TOKENP }} registry.digitalocean.com/urevise
            docker pull registry.digitalocean.com/urevise/urevise:latest
            # get the name of the running container
            container_name=$(docker inspect -f '{{.Name}}' $(docker ps -q))
