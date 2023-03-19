@@ -17,7 +17,7 @@ github_token = os.environ.get('TOKEN_GITHUB')
 
 # Define the fields for the new issue
 fields = {
-    'project': {'key': 'UEP'},
+    'project': {'key': 'ZDTP'},
     'issuetype': {'id': '10009'},
     'summary': 'DEPLOY TO PRODUCTION',
     'description': 'Creating of an issue using project keys and issue type names using the REST API',
