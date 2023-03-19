@@ -1,7 +1,7 @@
 name: Jira Repository Dispatch Trigger
 
-# on:
-#   repository_dispatch:
+ on:
+   repository_dispatch:
 
 jobs:
   trigger-github-action-from-jira-webhook-without-auth:
