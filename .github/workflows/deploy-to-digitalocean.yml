@@ -2,6 +2,7 @@ name: Jira Repository Dispatch Trigger
 
 on:
   repository_dispatch:
+#   test not working
 
 jobs:
   trigger-github-action-from-jira-webhook-without-auth:
