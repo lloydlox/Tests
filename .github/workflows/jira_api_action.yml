@@ -2,7 +2,7 @@ name: Create Jira Deploy Task
 
 on:
   push:
-     branches: [deveolp]
+     branches: [main]
 
 jobs:
   create_issue:
