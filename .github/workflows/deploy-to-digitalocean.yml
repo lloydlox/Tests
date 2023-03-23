@@ -1,10 +1,10 @@
 name: Jira Repository Dispatch Trigger
 
 on:
-# repository_dispatch:
- push:
-    branches: ["main"]
-# only 
+ repository_dispatch:
+#  push:
+#     branches: ["main"]
+
 
 jobs:
   build_and_push:
