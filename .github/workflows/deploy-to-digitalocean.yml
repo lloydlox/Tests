@@ -1,7 +1,10 @@
 name: Jira Repository Dispatch Trigger
 
-# on:
-  # trepository_dispatch:
+on:
+# repository_dispatch:
+ push:
+    branches: ["main"]
+
   # kokokok
 
 jobs:
@@ -20,11 +23,12 @@ jobs:
         run: doctl registry login --expiry-seconds 600
       - name: Tag image 
         run:
-          docker tag urevise registry.digitalocean.com/urevise/urevise:latest
+          # docker tag urevise registry.digitalocean.com/urevise/urevise:latest
+          docker tag urevise registry.digitalocean.com/urevise-frontend/urevise:latest
           
       - name: Push image to DO Container Registry 
-        run: docker push registry.digitalocean.com/urevise/urevise:latest
-        
+        # run: docker push registry.digitalocean.com/urevise/urevise:latest
+        run: docker push registry.digitalocean.com/urevise-frontend/urevise:latest
 
 
   deploy:
@@ -39,8 +43,10 @@ jobs:
        host: ${{ secrets.DROPLET_IP }}
        username: ${{ secrets.USERNAME }}
        script: |
-           docker login -u ${{ secrets.DIGITALOCEAN_API_TOKENP }} -p ${{ secrets.DIGITALOCEAN_API_TOKENP }} registry.digitalocean.com/urevise
-           docker pull registry.digitalocean.com/urevise/urevise:latest
+          #  docker login -u ${{ secrets.DIGITALOCEAN_API_TOKENP }} -p ${{ secrets.DIGITALOCEAN_API_TOKENP }} registry.digitalocean.com/urevise
+          docker login -u ${{ secrets.DIGITALOCEAN_API_TOKENP }} -p ${{ secrets.DIGITALOCEAN_API_TOKENP }} registry.digitalocean.com
+          #  docker pull registry.digitalocean.com/urevise/urevise:latest
+           docker pull registry.digitalocean.com/urevise-frontend/urevise:latest
            # get the name of the running container
            container_name=$(docker inspect -f '{{.Name}}' $(docker ps -q))
            # stop the container
@@ -48,5 +54,6 @@ jobs:
            # Remove old container
             docker rm "$container_name"
             # Run a new container from a new image
-            docker run -d -p 3000:3000 registry.digitalocean.com/urevise/urevise
+            # docker run -d -p 3000:3000 registry.digitalocean.com/urevise/urevise
+            docker run -d -p 3000:3000 registry.digitalocean.com/urevise-frontend/urevise
           
